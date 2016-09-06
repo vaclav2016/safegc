@@ -7,7 +7,7 @@ I have two primary target for this project:
  
 So, I had wrote simple memory manager in CP/M or MS-DOS style.
 
-Also this project could be used for embeded systems.
+Also, this project could be used for embeded systems.
 
 ## How to use ?
 
