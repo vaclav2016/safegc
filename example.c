@@ -1,3 +1,5 @@
+#define INTERNAL_GC
+
 #include "safegc.h"
 
 void test_ok() {
