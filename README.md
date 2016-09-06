@@ -38,25 +38,17 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
 
 ## Manual
 
-`GC_INIT(size_t);`
+Here is a few predefined "macros" from `safegc.h`:
 
-Allocate system memory bytes for safegc.
+`GC_INIT(size_t)` - Allocate system memory bytes for safegc.
 
-`GC_MALLOC(size_t);`
+`GC_MALLOC(size_t)` - Allocate internal memory. Return *void
 
-Allocate internal memory.
+`GC_FREE(void *)` - Free internal memory.
 
-`GC_FREE(void *);`
+`GC_DONE()` - Destroy allocated system memory. I shoud call only in end of your programm.
 
-Free internal memory.
-
-`GC_DONE();`
-
-Destroy allocated system memory. I shoud call only in end of your programm.
-
-`GC_DUMP();`
-
-Show internal memory state (if something has been allocated).
+`GC_DUMP()` - Show internal memory state (if something has been allocated).
 
 ## Build
 
