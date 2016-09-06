@@ -42,7 +42,14 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
 
 ## Dependencies
 
-None
+NONE
+
+## Donate
+
+I maintain this project in my free time, if it helped you please support my work via Bitcoins, thanks a lot!
+
+Bitcoin-wallet is: `1QAfNs5Utygt2XQoV3YCykzHs63S3AfEJ3`
+
 
 ## Licensing
 
