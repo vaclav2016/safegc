@@ -18,22 +18,22 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
     #include "safegc.h"
 
     void test_ok() {
-	char *str = GC_MALLOC(126);
-	GC_FREE(str);
-	GC_DUMP();
+        char *str = GC_MALLOC(126);
+        GC_FREE(str);
+        GC_DUMP();
     }
 
     void test_bad() {
-	char *str = GC_MALLOC(126);
-	GC_DUMP();
+        char *str = GC_MALLOC(126);
+        GC_DUMP();
     }
 
     int main() {
-	GC_INIT(1024 * 64);
-	test_ok();
-	test_bad();
-	GC_DONE();
-	return 0;
+        GC_INIT(1024 * 64);
+        test_ok();
+        test_bad();
+        GC_DONE();
+        return 0;
     }
 
 ## Manual
