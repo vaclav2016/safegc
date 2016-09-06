@@ -15,6 +15,7 @@ Here is [example.c](example.c). This code have a problem into `test_bad()` and y
 
 If you don't want have a debug info - just remove `GC_DUMP()` call and you will have small and sweet memory allocator into your project. :)
 
+    #define INTERNAL_GC
     #include "safegc.h"
 
     void test_ok() {
@@ -37,6 +38,13 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
     }
 
 ## Manual
+
+To start use safegc you shoud write:
+
+    #define INTERNAL_GC
+    #include "safegc.h"
+
+In case, when you want fast switch project to system malloc/free - just remove `#define INTERNAL_GC`.
 
 Here is a few predefined "macros" from `safegc.h`:
 
