@@ -33,8 +33,6 @@ DEALINGS IN THE SOFTWARE.
 #include<stdint.h>
 #include"safegc.h"
 
-#define MIN_FREE_BLK 128
-
 #define SIGNATURE 0x1234
 
 #pragma pack(push, 1)
@@ -49,6 +47,7 @@ struct MemBlk {
 #pragma pack(pop)
 
 #define MEM_BLK_SIZE sizeof(struct MemBlk)
+#define MIN_FREE_BLK (MEM_BLK_SIZE * 2)
 
 struct MemBlk *first;
 size_t gc_memsize;
@@ -76,7 +75,7 @@ void *gc_malloc(size_t size) {
 		size = (size / MIN_FREE_BLK + 1) * MIN_FREE_BLK;
 	}
 	while(f != NULL) {
-		if((f->type == FREE) && (f->size > size + 2 * MEM_BLK_SIZE + MIN_FREE_BLK)) {
+		if((f->type == FREE) && (f->size > size + 2 * MEM_BLK_SIZE)) {
 			result = ((void*)f) + MEM_BLK_SIZE;
 
 			fsize = f->size;

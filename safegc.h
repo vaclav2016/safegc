@@ -33,6 +33,8 @@ DEALINGS IN THE SOFTWARE.
 
 #ifndef INTERNAL_GC
 
+#include<stdlib.h>
+
 #define GC_MALLOC(a) malloc(a)
 #define GC_FREE(a) free(a)
 #define GC_INIT(a) {}
