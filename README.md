@@ -36,6 +36,28 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
     	return 0;
     }
 
+## Manual
+
+`GC_INIT(size_t);`
+
+Allocate system memory bytes for safegc.
+
+`GC_MALLOC(size_t);`
+
+Allocate internal memory.
+
+`GC_FREE(void *);`
+
+Free internal memory.
+
+`GC_DONE();`
+
+Destroy allocated system memory. I shoud call only in end of your programm.
+
+`GC_DUMP();`
+
+Show internal memory state (if something has been allocated).
+
 ## Build
 
     $ gcc example.c safegc.c -o example
