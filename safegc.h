@@ -31,8 +31,6 @@ DEALINGS IN THE SOFTWARE.
 #ifndef _SAFEGC_H_
 #define _SAFEGC_H_
 
-#define INTERNAL_GC
-
 #ifndef INTERNAL_GC
 
 #define GC_MALLOC(a) malloc(a)
@@ -47,7 +45,6 @@ DEALINGS IN THE SOFTWARE.
 #define GC_FREE(a) gc_free(a)
 #define GC_INIT(a) gc_init(a)
 #define GC_DONE() gc_done()
-#define GC_CHECK() gc_check()
 #define GC_DUMP() gc_dump()
 
 extern void gc_init(size_t);
