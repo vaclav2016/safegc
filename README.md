@@ -39,12 +39,12 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
 
 ## Manual
 
-To start use safegc you shoud write:
+To start use **safegc** you should write:
 
     #define INTERNAL_GC
     #include "safegc.h"
 
-In case, when you want fast switch project to system malloc/free - just remove `#define INTERNAL_GC`.
+In case, when you want fast switch your project to system malloc/free - just remove line `#define INTERNAL_GC`.
 
 Here is a few predefined "macros" from `safegc.h`:
 
@@ -56,7 +56,7 @@ Here is a few predefined "macros" from `safegc.h`:
 
 `GC_DONE()` - Destroy allocated system memory. I shoud call only in end of your programm.
 
-`GC_DUMP()` - Show internal memory state (if something has been allocated).
+`GC_DUMP()` - Show internal memory state (if something has been allocated). You may not use it.
 
 ## Build
 
