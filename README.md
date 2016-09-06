@@ -1,6 +1,6 @@
 # Safe Garbage Collector
 
-I have two primary target for this project:
+This is minimalistic memory manager. I have two primary target for this project:
 
 1. Detect memory leaks into my program
 2. Reduce call to system malloc / free (some time it is have a big cost) with lightweight replacement
@@ -38,7 +38,7 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
 
 ## Manual
 
-To start use **safegc** you should include `safegc.h`. If you want use ***safegc** (or switch to system calls) - you should use complier options:
+To start use **safegc** you should include `safegc.h`. If you want use **safegc** (or switch to system calls) - you should use complier options:
 
     $ gcc -DINTERNAL_GC ...
 
