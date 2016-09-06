@@ -17,5 +17,4 @@ int main() {
 	test_bad();
 	GC_DONE();
 	return 0;
-
 }
