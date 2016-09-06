@@ -56,7 +56,12 @@ Here is a few predefined "macros" from `safegc.h`:
 
 ## Build
 
-    $ gcc -DINTERNAL_GC example.c safegc.c -o example
+    $ make
+
+or
+
+    $ gcc -DINTERNAL_GC example.c safegc.c -o example_gc
+    $ gcc example.c safegc.c -o example
 
 ## Dependencies
 
