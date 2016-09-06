@@ -19,32 +19,29 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
     #include "safegc.h"
 
     void test_ok() {
-    	char *str = GC_MALLOC(126);
-    	GC_FREE(str);
-    	GC_DUMP();
+	char *str = GC_MALLOC(126);
+	GC_FREE(str);
+	GC_DUMP();
     }
 
     void test_bad() {
-    	char *str = GC_MALLOC(126);
-    	GC_DUMP();
+	char *str = GC_MALLOC(126);
+	GC_DUMP();
     }
 
     int main() {
-    	GC_INIT(1024 * 64);
-    	test_ok();
-    	test_bad();
-    	GC_DONE();
-    	return 0;
+	GC_INIT(1024 * 64);
+	test_ok();
+	test_bad();
+	GC_DONE();
+	return 0;
     }
 
 ## Manual
 
-To start use **safegc** you should write:
+To start use **safegc** you should include `safegc.h`. If you want use ***safegc** (or switch to system calls) - you should use complier options:
 
-    #define INTERNAL_GC
-    #include "safegc.h"
-
-In case, when you want fast switch your project to system malloc/free - just remove line `#define INTERNAL_GC`.
+    $ gcc -DINTERNAL_GC ...
 
 Here is a few predefined "macros" from `safegc.h`:
 
@@ -60,7 +57,7 @@ Here is a few predefined "macros" from `safegc.h`:
 
 ## Build
 
-    $ gcc example.c safegc.c -o example
+    $ gcc -DINTERNAL_GC example.c safegc.c -o example
 
 ## Dependencies
 
