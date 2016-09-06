@@ -15,7 +15,6 @@ Here is [example.c](example.c). This code have a problem into `test_bad()` and y
 
 If you don't want have a debug info - just remove `GC_DUMP()` call and you will have small and sweet memory allocator into your project. :)
 
-    #define INTERNAL_GC
     #include "safegc.h"
 
     void test_ok() {
