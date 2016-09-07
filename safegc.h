@@ -31,29 +31,32 @@ DEALINGS IN THE SOFTWARE.
 #ifndef _SAFEGC_H_
 #define _SAFEGC_H_
 
-#ifndef INTERNAL_GC
-
 #include<stdlib.h>
-
-#define GC_MALLOC(a) malloc(a)
-#define GC_FREE(a) free(a)
-#define GC_INIT(a) {}
-#define GC_DONE() {}
-#define GC_DUMP() {}
-
-#else
-
-#define GC_MALLOC(a) gc_malloc(a)
-#define GC_FREE(a) gc_free(a)
-#define GC_INIT(a) gc_init(a)
-#define GC_DONE() gc_done()
-#define GC_DUMP() gc_dump()
 
 extern void gc_init(size_t);
 extern void gc_done();
 extern void *gc_malloc(size_t);
 extern void gc_free(void *);
 extern void gc_dump();
+extern void *gc_realloc(void *, size_t);
+
+#ifdef INTERNAL_GC
+
+#define GC_MALLOC(a) gc_malloc(a)
+#define GC_FREE(a) gc_free(a)
+#define GC_INIT(a) gc_init(a)
+#define GC_DONE() gc_done()
+#define GC_DUMP() gc_dump()
+#define GC_REALLOC(a, b) gc_realloc(a, b)
+
+#else
+
+#define GC_MALLOC(a) malloc(a)
+#define GC_FREE(a) free(a)
+#define GC_REALLOC(a, b) realloc(a, b)
+#define GC_INIT(a) {}
+#define GC_DONE() {}
+#define GC_DUMP() {}
 
 #endif
 

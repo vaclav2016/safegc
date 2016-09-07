@@ -4,8 +4,16 @@ This is minimalistic memory manager. I have two primary target for this project:
 
 1. Detect memory leaks into my program
 2. Reduce call to system malloc / free (some time it is have a big cost) with lightweight replacement
- 
+
 So, I had wrote simple memory manager in CP/M or MS-DOS style.
+
+For example, I do with `GC_REALLOC` something like:
+
+    for(int i = 0; i< 32*1024*1024; i++) {
+        sb_append(sb, 'c');
+    }
+
+This code work with 36MB internal memory.
 
 Also, this project could be used for embeded systems.
 
@@ -47,6 +55,8 @@ Here is a few predefined "macros" from `safegc.h`:
 `GC_INIT(size_t)` - Allocate system memory bytes for safegc.
 
 `GC_MALLOC(size_t)` - Allocate internal memory. Return *void
+
+`GC_REALLOC(void *, size_t)` - Realloc new size of internal memory. Return *void.
 
 `GC_FREE(void *)` - Free internal memory.
 
