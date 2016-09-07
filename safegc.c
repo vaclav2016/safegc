@@ -168,12 +168,6 @@ void *_gc_merge_nbhood(struct MemBlk *f, size_t rsize) {
 	if(nsize + psize + osize >rsize) {
 		if(nsize > 0) {
 			_gc_merge(f);
-			if(f->size > rsize + 2*MEM_BLK_SIZE) {
-				_gc_split(f, BUSY, FREE, rsize);
-			}
-		}
-		if(f->size >= rsize) {
-			return ptr;
 		}
 		if(psize > 0) {
 			f = f->prev;
@@ -181,9 +175,9 @@ void *_gc_merge_nbhood(struct MemBlk *f, size_t rsize) {
 			_gc_merge(f);
 			memmove(nptr, ptr, osize);
 			ptr = nptr;
-			if(f->size > rsize + 2*MEM_BLK_SIZE) {
-				_gc_split(f, BUSY, FREE, rsize);
-			}
+		}
+		if(f->size > rsize + 2*MEM_BLK_SIZE) {
+			_gc_split(f, BUSY, FREE, rsize);
 		}
 		return ptr;
 	}
