@@ -105,7 +105,7 @@ void *_gc_malloc(size_t size) {
 	if(size % MIN_FREE_BLK != 0) {
 		size = (size / MIN_FREE_BLK + 1) * MIN_FREE_BLK;
 	}
-	size_t rsize = size + 2 * MEM_BLK_SIZE;
+	size_t rsize = size + MIN_FREE_BLK;
 	while(f != NULL) {
 		if((f->type == FREE) && (f->size > rsize)) {
 			return _gc_split(f, BUSY, FREE, size);
@@ -126,7 +126,6 @@ void _gc_clear_all() {
 		firstFree = firstFree==NULL && f->type == FREE ? f : firstFree;
 		f = f->next;
 	}
-	free_count = 0;
 }
 
 void *gc_malloc(size_t size) {
@@ -145,10 +144,13 @@ void gc_free(void *ptr) {
 	} else {
 		((struct MemBlk *)ptr)->type = FREE;
 	}
+/*
 	free_count++;
-	if(free_count > 50) {
+	if(free_count > 100) {
 		_gc_clear_all();
+		free_count = 0;
 	}
+*/
 }
 
 void *_gc_merge_nbhood(struct MemBlk *f, size_t rsize) {
@@ -176,7 +178,7 @@ void *_gc_merge_nbhood(struct MemBlk *f, size_t rsize) {
 			memmove(nptr, ptr, osize);
 			ptr = nptr;
 		}
-		if(f->size > rsize + 2*MEM_BLK_SIZE) {
+		if(f->size > rsize + MIN_FREE_BLK) {
 			_gc_split(f, BUSY, FREE, rsize);
 		}
 		return ptr;
@@ -189,17 +191,19 @@ void *gc_realloc(void *ptr, size_t rsize) {
 		return gc_malloc(rsize);
 	}
 	struct MemBlk *f = ptr - MEM_BLK_SIZE;
-	if((ptr != NULL) && (f->size >= rsize)) {
+
+	if((f->size >= rsize) && (f->size * 7 / 10 < rsize)) {
 		return ptr;
 	}
+
 	if(rsize % MIN_FREE_BLK != 0) {
 		rsize = (rsize / MIN_FREE_BLK + 1) * MIN_FREE_BLK;
 	}
-	void *np = _gc_merge_nbhood(f, rsize);
+	void *np = _gc_merge_nbhood(f, rsize + MIN_FREE_BLK * 2 );
 	if(np != NULL) {
 		return np;
 	}
-	np = gc_malloc( (rsize * 3) / 2);
+	np = gc_malloc( rsize + MIN_FREE_BLK * 2);
 	if(ptr != NULL){
 		memcpy(np, ptr, f->size);
 		gc_free(ptr);
