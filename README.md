@@ -1,19 +1,8 @@
 # Safe Garbage Collector
 
-This is minimalistic memory manager. I have two primary target for this project:
+This is minimalistic memory manager. I have two primary target for this project: detect memory leaks into my projects.
 
-1. Detect memory leaks into my program
-2. Reduce call to system malloc / free (some time it is have a big cost) with lightweight replacement
-
-So, I had wrote simple memory manager in CP/M or MS-DOS style.
-
-For example, I do with `GC_REALLOC` something like:
-
-    for(int i = 0; i< 32*1024*1024; i++) {
-        sb_append(sb, 'c');
-    }
-
-This code work with 36MB internal memory.
+So, I had wrote simple memory allocator in MS-DOS style.
 
 Also, this project could be used for embeded systems.
 
@@ -46,9 +35,11 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
 
 ## Manual
 
-To start use **safegc** you should include `safegc.h`. If you want use **safegc** (or switch to system calls) - you should use complier options:
+To start use **safegc** you should include `safegc.h`. If you want use **safegc** (or switch to system calls) - you should pass complier option:
 
     $ gcc -DINTERNAL_GC ...
+
+If you dont pass `INTERNAL_GC` option - your code will work with system's malloc / realloc / free.
 
 Here is a few predefined "macros" from `safegc.h`:
 
@@ -82,7 +73,6 @@ NONE
 I maintain this project in my free time, if it helped you please support my work via Bitcoins, thanks a lot!
 
 Bitcoin-wallet is: `1QAfNs5Utygt2XQoV3YCykzHs63S3AfEJ3`
-
 
 ## Licensing
 
