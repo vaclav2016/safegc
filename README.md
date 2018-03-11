@@ -12,7 +12,8 @@ Here is [example.c](example.c). This code have a problem into `test_bad()` and y
 
 If you don't want have a debug info - just remove `GC_DUMP()` call and you will have small and sweet memory allocator into your project. :)
 
-    #include "safegc.h"
+```c
+    #include "safegc.h"
 
     void test_ok() {
         char *str = GC_MALLOC(126);
@@ -31,7 +32,8 @@ If you don't want have a debug info - just remove `GC_DUMP()` call and you will 
         test_bad();
         GC_DONE();
         return 0;
-    }
+    }
+```
 
 ## Manual
 
